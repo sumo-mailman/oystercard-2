@@ -1,3 +1,4 @@
+
 class Oystercard
   attr_reader :balance, :limit, :in_journey
 
