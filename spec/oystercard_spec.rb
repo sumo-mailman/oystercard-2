@@ -44,29 +44,30 @@ describe Oystercard do
     context 'touches in to station' do
       it 'succesfully' do
         subject.balance = Oystercard::MINIMUM_FARE
-        subject.touch_in(station)
+        subject.touch_in(entry_station)
         expect(subject.in_journey?).to eq true
       end
       it 'requiring minimum balance' do
-        expect { subject.touch_in(station) }.to raise_error 'Min balance of £1 required'
+        expect { subject.touch_in(entry_station) }.to raise_error 'Min balance of £1 required'
       end
 
       it 'card saves entry_station' do
         subject.balance = Oystercard::MINIMUM_FARE
-        subject.touch_in(station)
-        expect(subject.entry_station).to eq station
+        subject.touch_in(entry_station)
+        expect(subject.entry_station).to eq entry_station
       end
     end
 
     context 'touches out of station' do
       it 'successful' do
-        subject.touch_out(station)
+        subject.touch_out(exit_station)
         expect(subject.in_journey?).to eq false
       end
+
       it 'deduction of balance by fare' do
         subject.balance = Oystercard::MINIMUM_FARE
-        subject.touch_in(station)
-        expect { subject.touch_out(station) }.to change { subject.balance }.by(-1)
+        subject.touch_in(entry_station)
+        expect { subject.touch_out(exit_station) }.to change { subject.balance }.by(-1)
       end
 
       it 'card saves exit_station' do
