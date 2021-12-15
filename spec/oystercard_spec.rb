@@ -36,7 +36,7 @@ describe Oystercard do
     context "touches in to station" do
 
       it "succesfully" do
-        subject.top_up(5)
+        subject.balance = Oystercard::MINIMUM_FARE
         subject.touch_in(station)
         expect(subject.in_journey?).to eq true
       end
