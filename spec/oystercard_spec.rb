@@ -21,8 +21,8 @@ describe Oystercard do
 
   describe "#deducts" do
     it "deducts balance by amount" do
-      subject.top_up(5)
-      expect { subject.send(:deduct, Oystercard::MINIMUM_FARE) }.to change { subject.balance }.from(5).to(4)
+      subject.balance = Oystercard::MINIMUM_FARE
+      expect { subject.send(:deduct, Oystercard::MINIMUM_FARE) }.to change { subject.balance }.by(-1)
     end
   end
 
@@ -45,7 +45,7 @@ describe Oystercard do
       end
 
       it "card saves entry_station" do
-        subject.top_up(5)
+        subject.balance = Oystercard::MINIMUM_FARE
         subject.touch_in(station)
         expect(subject.entry_station).to eq station
       end
