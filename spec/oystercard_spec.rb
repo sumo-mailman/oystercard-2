@@ -10,6 +10,10 @@ describe Oystercard do
     expect(subject).to respond_to(:balance)
   end
 
+  it "initialises an empty journey list upon default" do
+    expect(subject.journey).to be_empty
+  end
+
   # it "responds to journey" do 
   #   expect(subject).to respond_to (:journey)
   # end
