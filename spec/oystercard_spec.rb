@@ -3,6 +3,9 @@ require 'station'
 
 describe Oystercard do
 
+  let(:station) { double :station }
+  let(:station) { double :station }
+
   it "checks balance" do
     expect(subject).to respond_to(:balance)
   end
@@ -35,8 +38,6 @@ describe Oystercard do
     it "checks if card is in_journey" do
       expect(subject).to respond_to(:in_journey?)
     end
-
-    let(:station) { double :station }
     
     context "touches in to station" do
 
@@ -72,6 +73,16 @@ describe Oystercard do
         subject.touch_out(station)
         expect(subject.exit_station).to eq station
       end
+
+      it "saves the entry/exit as a journey"do
+      subject.balance = Oystercard::MINIMUM_FARE
+      subject.touch_in(station)
+      subject.touch_out(station)  
+      expect(subject.journey).to include(
+        :entry_station => station,
+        :exit_station => station
+      )
+    end
     end
   end
 end
