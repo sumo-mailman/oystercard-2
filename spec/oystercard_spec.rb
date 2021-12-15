@@ -30,8 +30,9 @@ describe Oystercard do
     it "checks if card is in_journey" do
       expect(subject).to respond_to(:in_journey?)
     end
-    let(:station) { double :station }
 
+    let(:station) { double :station }
+    
     context "touches in to station" do
 
       it "succesfully" do
@@ -49,6 +50,7 @@ describe Oystercard do
         expect(subject.entry_station).to eq station
       end
     end
+
     context "touches out of station" do
       it "successful" do
         subject.touch_out

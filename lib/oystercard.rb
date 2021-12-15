@@ -23,8 +23,7 @@ class Oystercard
   def touch_in(station)
     raise "Min balance of £1 required" if balance < MINIMUM_FARE
     @in_journey = true
-    return @entry_station = station
-    
+    @entry_station = station
   end
 
   def touch_out
