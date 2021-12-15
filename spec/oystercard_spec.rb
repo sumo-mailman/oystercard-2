@@ -7,6 +7,11 @@ describe Oystercard do
     expect(subject).to respond_to(:balance)
   end
 
+  # it "responds to journey" do 
+  #   expect(subject).to respond_to (:journey)
+  # end
+  
+
   describe "#tops_up" do
     it "tops up the balance" do 
       expect(subject).to respond_to(:top_up)
@@ -53,13 +58,19 @@ describe Oystercard do
 
     context "touches out of station" do
       it "successful" do
-        subject.touch_out
+        subject.touch_out(station)
         expect(subject.in_journey?).to eq false
       end
       it "deduction of balance by fare" do
-        subject.top_up(5)
+        subject.balance = Oystercard::MINIMUM_FARE
         subject.touch_in(station)
-        expect { subject.touch_out }.to change{ subject.balance }.by(-1)
+        expect { subject.touch_out(station) }.to change{ subject.balance }.by(-1)
+      end
+
+      it "card saves exit_station" do
+        subject.balance = Oystercard::MINIMUM_FARE
+        subject.touch_out(station)
+        expect(subject.exit_station).to eq station
       end
     end
   end

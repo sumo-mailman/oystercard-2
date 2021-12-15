@@ -1,6 +1,6 @@
 class Oystercard
   attr_accessor :balance
-  attr_reader :limit, :in_journey, :entry_station
+  attr_reader :limit, :in_journey, :entry_station, :exit_station
 
   DEFAULT_BALANCE = 0
   DEFAULT_LIMIT = 90
@@ -10,6 +10,7 @@ class Oystercard
     @balance = DEFAULT_BALANCE
     @limit = DEFAULT_LIMIT
     @entry_station = nil
+    @exit_station = nil
   end
 
   def top_up(money)
@@ -19,6 +20,7 @@ class Oystercard
 
   def in_journey?
     !!in_journey
+    #!! converts nil value to true or false
   end
 
   def touch_in(station)
@@ -28,8 +30,9 @@ class Oystercard
     #trigger in_journey 
   end
 
-  def touch_out
+  def touch_out(station)
     self.deduct(1)
+    @exit_station = station
     @in_journey = false
   end
 
