@@ -12,11 +12,11 @@ class Oystercard
     @entry_station = nil
     @exit_station = nil
     @journey = {}
+    @journey_history = []
   end
 
   def top_up(money)
     raise "Max limit of #{@limit} reached" if @balance + money > @limit
-
     @balance += money
   end
 
@@ -27,20 +27,24 @@ class Oystercard
 
   def touch_in(station)
     raise 'Min balance of £1 required' if balance < MINIMUM_FARE
-
-    @entry_station = station
     @journey[:entry_station] = station
     @in_journey = true
   end
-
+  
   def touch_out(station)
-    deduct(1)
-    @exit_station = station
-    @in_journey = false
+    deduct(MINIMUM_FARE)
+  
     @journey[:exit_station] = station
+    add_journey
+    @in_journey = false
   end
 
   private
+
+  def add_journey
+    @journey_history << @journey
+    @journey = {}
+  end
 
   def deduct(money)
     @balance -= money

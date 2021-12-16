@@ -86,6 +86,9 @@ describe Oystercard do
           exit_station: exit_station
         )
       end
+      it 'saves the journey to journey_history' do
+
+      end
     end
   end
 end
