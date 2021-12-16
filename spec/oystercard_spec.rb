@@ -54,8 +54,8 @@ describe Oystercard do
 
       it 'card saves entry_station' do
         subject.balance = Oystercard::MINIMUM_FARE
-        subject.touch_in(entry_station)
-        expect(subject.entry_station).to eq entry_station
+        subject.touch_in(station)
+        expect(subject.entry_station).to eq station
       end
     end
 
