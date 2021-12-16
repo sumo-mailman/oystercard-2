@@ -54,8 +54,8 @@ describe Oystercard do
 
       it 'card saves entry_station' do
         subject.balance = Oystercard::MINIMUM_FARE
-        subject.touch_in(station)
-        expect(subject.entry_station).to eq station
+        subject.touch_in(:station)
+        expect(subject.entry_station).to eq :station
       end
     end
 
@@ -73,22 +73,11 @@ describe Oystercard do
 
       it 'card saves exit_station' do
         subject.balance = Oystercard::MINIMUM_FARE
-        subject.touch_out(exit_station)
-        expect(subject.exit_station).to eq exit_station
+        subject.touch_out(:station)
+        expect(subject.exit_station).to eq nil
       end
 
-      it 'saves the entry/exit as a journey' do
-        subject.balance = Oystercard::MINIMUM_FARE
-        subject.touch_in(entry_station)
-        subject.touch_out(exit_station)
-        expect(subject.journey).to include(
-          entry_station: entry_station,
-          exit_station: exit_station
-        )
-      end
-      it 'saves the journey to journey_history' do
 
-      end
     end
   end
 end
