@@ -25,7 +25,8 @@ describe Oystercard do
       expect { subject.top_up(5) }.to change { subject.balance }.from(0).to(5)
     end
     it 'prevents top up above max limit' do
-      expect { subject.top_up(91) }.to raise_error "Max limit of #{subject.limit} reached"
+      subject.top_up(Oystercard::DEFAULT_LIMIT)
+      expect { subject.top_up(1) }.to raise_error "Max limit of #{subject.limit} reached"
     end
   end
 
