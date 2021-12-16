@@ -76,8 +76,17 @@ describe Oystercard do
         subject.touch_out(:station)
         expect(subject.exit_station).to eq nil
       end
+    end
+  end
 
-
+  describe '#add_journey' do
+    it 'saves the journey to journey_history' do 
+      subject.balance = Oystercard::DEFAULT_LIMIT
+      subject.touch_in(:station)
+      subject.touch_out(:station)
+      expect(subject.journey_history).to_not contain_exactly(
+        {:entry_station=> :station}, 
+        {:exit_station=> :station})
     end
   end
 end
