@@ -8,4 +8,5 @@ group :test, :development do
   gem 'rspec'
 end
 
-git_source(:github) { |_oystercard| 'https://github.com/fpmrqs/oystercard.git' }
+git_source(:github) { |oystercard| 'https://github.com/fpmrqs/oystercard.git' }
+

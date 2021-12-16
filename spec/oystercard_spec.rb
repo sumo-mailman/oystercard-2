@@ -9,7 +9,7 @@ describe Oystercard do
     expect(subject).to respond_to(:balance)
   end
 
-  it 'initialises an empty journey list upon default' do
+  it 'has an empty list of journeys by default' do
     expect(subject.journey).to be_empty
   end
 
@@ -67,7 +67,7 @@ describe Oystercard do
       it 'deduction of balance by fare' do
         subject.balance = Oystercard::MINIMUM_FARE
         subject.touch_in(entry_station)
-        expect { subject.touch_out(exit_station) }.to change { subject.balance }.by(-1)
+        expect { subject.touch_out(exit_station) }.to change { subject.balance }.by(-(Oystercard::MINIMUM_FARE))
       end
 
       it 'card saves exit_station' do
