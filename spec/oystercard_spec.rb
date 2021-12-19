@@ -1,5 +1,6 @@
 require 'oystercard'
 require 'station'
+require 'journey'
 
 describe Oystercard do
   let(:entry_station) { double :entry_station }
@@ -92,15 +93,32 @@ describe Oystercard do
   end
 end
 
-describe Station do 
-  let(:test_name) { "Angel" }
-  let(:test_zone) { 1 }
-  let(:arrival) { Station.new(name: test_name, zone: test_zone) }
+# describe Station do 
+#   let(:test_name) { "Angel" }
+#   let(:test_zone) { 1 }
+#   let(:arrival) { Station.new(name: test_name, zone: test_zone) }
 
-  it 'displays the name of the station' do 
-    expect(arrival.name).to eq "Angel"
+#   it 'displays the name of the station' do 
+#     expect(arrival.name).to eq "Angel"
+#   end 
+#   it 'displays the name of the zone' do 
+#     expect(arrival.zone).to eq 1
+#   end
+# end 
+
+describe Station do 
+  let(:name) {"Angel"}
+  let(:zone) {1}
+  let(:station) { described_class.new(name: name, zone: zone)}
+  
+  it "returns the name of the station" do
+    expect(station.name).to eq "Angel"
   end 
-  it 'displays the name of the zone' do 
-    expect(arrival.zone).to eq 1
-  end
+
+  it "returns the zone of the station" do
+    expect(station.zone).to eq 1
+  end 
+end 
+
+describe Journey do 
 end 
