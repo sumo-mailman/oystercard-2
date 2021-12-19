@@ -11,9 +11,9 @@ describe Oystercard do
     expect(subject).to respond_to(:balance)
   end
 
-  it 'has an empty list of journeys by default' do
-    expect(subject.journey).to be_empty
-  end
+  # it 'has an empty list of journeys by default' do
+  #   expect(subject.journey).to be_empty
+  # end
 
   # it "responds to journey" do
   #   expect(subject).to respond_to (:journey)
@@ -86,7 +86,7 @@ describe Oystercard do
       subject.balance = Oystercard::DEFAULT_LIMIT
       subject.touch_in(entry_station)
       subject.touch_out(exit_station)
-      expect(subject.journey_history).to_not contain_exactly(
+      expect(subject.new_journey.journey_history).to_not contain_exactly(
         {:entry_station=> entry_station}, 
         {:exit_station=> exit_station})
     end
@@ -121,4 +121,9 @@ describe Station do
 end 
 
 describe Journey do 
+  #journey list initialises empty at first 
+  it 'has an empty list of journeys by default' do
+    expect(subject.journey).to be_empty
+  end
+
 end 
