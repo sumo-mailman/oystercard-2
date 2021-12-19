@@ -93,12 +93,12 @@ describe Oystercard do
 end
 
 describe Station do 
-  let(:recorded_station) {'Angel'}
+  let(:name) {'Angel'}
   let(:zone) {1}
 
   it 'is initialised' do 
-    arrival = Station.new(recorded_station, zone)
-    expect(arrival.recorded_station). to eq 'Angel'
-    expect(arrival.zone). to eq 1
+    arrival = Station.new(name: name, zone: zone)
+    expect(arrival.name).to eq "Angel"
+    expect(arrival.zone).to eq 1
   end
 end 

@@ -1,3 +1,5 @@
+require_relative './station'
+
 class Oystercard
   attr_accessor :balance
   attr_reader :limit, :entry_station, :exit_station, :journey, :journey_history#, :in_journey
