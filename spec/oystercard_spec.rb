@@ -2,8 +2,9 @@ require 'oystercard'
 require 'station'
 
 describe Oystercard do
-  let(:entry_station) { double :station }
-  let(:exit_station) { double :station }
+  let(:entry_station) { double :entry_station }
+  let(:exit_station) { double :exit_station }
+
 
   it 'checks balance' do
     expect(subject).to respond_to(:balance)
@@ -54,8 +55,8 @@ describe Oystercard do
 
       it 'card saves entry_station' do
         subject.balance = Oystercard::MINIMUM_FARE
-        subject.touch_in(:station)
-        expect(subject.entry_station).to eq :station
+        subject.touch_in(entry_station)
+        expect(subject.entry_station).to eq entry_station
       end
     end
 
@@ -80,16 +81,24 @@ describe Oystercard do
   end
 
   describe '#add_journey' do
-    it 'saves the journey to journey_history' do 
+    it 'saves journey to journey_history' do 
       subject.balance = Oystercard::DEFAULT_LIMIT
-      subject.touch_in(:station)
-      subject.touch_out(:station)
+      subject.touch_in(entry_station)
+      subject.touch_out(exit_station)
       expect(subject.journey_history).to_not contain_exactly(
-        {:entry_station=> :station}, 
-        {:exit_station=> :station})
+        {:entry_station=> entry_station}, 
+        {:exit_station=> exit_station})
     end
   end
 end
 
-describe Station do
-end
+describe Station do 
+  let(:recorded_station) {'Angel'}
+  let(:zone) {1}
+
+  it 'is initialised' do 
+    arrival = Station.new(recorded_station, zone)
+    expect(arrival.recorded_station). to eq 'Angel'
+    expect(arrival.zone). to eq 1
+  end
+end 
