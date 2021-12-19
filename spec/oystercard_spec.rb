@@ -93,12 +93,14 @@ describe Oystercard do
 end
 
 describe Station do 
-  let(:name) {'Angel'}
-  let(:zone) {1}
+  let(:test_name) { "Angel" }
+  let(:test_zone) { 1 }
+  let(:arrival) { Station.new(name: test_name, zone: test_zone) }
 
-  it 'is initialised' do 
-    arrival = Station.new(name: name, zone: zone)
+  it 'displays the name of the station' do 
     expect(arrival.name).to eq "Angel"
+  end 
+  it 'displays the name of the zone' do 
     expect(arrival.zone).to eq 1
   end
 end 
